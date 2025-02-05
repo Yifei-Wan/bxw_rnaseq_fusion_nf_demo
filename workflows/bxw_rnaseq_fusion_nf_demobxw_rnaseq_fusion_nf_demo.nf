@@ -16,6 +16,8 @@ include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_bxw_
 
 workflow BXW_RNASEQ_FUSION_NF_DEMOBXW_RNASEQ_FUSION_NF_DEMO {
 
+    take input_fastq 
+
     main:
     //
     // Collate and save software versions
@@ -29,12 +31,6 @@ workflow BXW_RNASEQ_FUSION_NF_DEMOBXW_RNASEQ_FUSION_NF_DEMO {
         ).set { ch_collated_versions }
     
     // Run Fusion Callers
-    // Pre-pair input fastq
-    input_fastq = Channel
-    .fromFilePairs("${params.input}/*_{1,2}.fastq", flat: true)
-    .set { fastq_pairs }
-
-
     // Conditionally run StarFusion if requested
     if ( params.RunStarFusion ) {
         StarFusion(input_fastq, genome_lib: params.genome_lib, add_memory: params.add_memory)
