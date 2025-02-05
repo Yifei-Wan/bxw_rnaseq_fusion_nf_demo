@@ -12,8 +12,7 @@
 
 ## Introduction
 
-**DFCI-BxMD/bxw_rnaseq_fusion_nf_demobxw_rnaseq_fusion_nf_demo** is a bioinformatics pipeline that ...
-
+**DFCI-BxMD/bxw_rnaseq_fusion_nf_demobxw_rnaseq_fusion_nf_demo** is a bioinformatics pipeline that calls fusion variants from RNA FastQ.
 <!-- TODO nf-core:
    Complete this sentence with a 2-3 sentence summary of what types of data the pipeline ingests, a brief overview of the
    major pipeline sections and the types of output it produces. You're giving an overview to someone new
@@ -22,8 +21,7 @@
 
 <!-- TODO nf-core: Include a figure that guides the user through the major workflow steps. Many nf-core
      workflows use the "tube map" design for that. See https://nf-co.re/docs/contributing/design_guidelines#examples for examples.   -->
-<!-- TODO nf-core: Fill in short bullet-pointed list of the default steps in the pipeline -->1. Read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))2. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
-
+<!-- TODO nf-core: Fill in short bullet-pointed list of the default steps in the pipeline -->
 ## Usage
 
 > [!NOTE]
@@ -84,6 +82,4 @@ This pipeline uses code and infrastructure developed and maintained by the [nf-c
 
 > **The nf-core framework for community-curated bioinformatics pipelines.**
 >
-> Philip Ewels, Alexander Peltzer, Sven Fillinger, Harshil Patel, Johannes Alneberg, Andreas Wilm, Maxime Ulysse Garcia, Paolo Di Tommaso & Sven Nahnsen.
->
-> _Nat Biotechnol._ 2020 Feb 13. doi: [10.1038/s41587-020-0439-x](https://dx.doi.org/10.1038/s41587-020-0439-x).
+Placeholder
