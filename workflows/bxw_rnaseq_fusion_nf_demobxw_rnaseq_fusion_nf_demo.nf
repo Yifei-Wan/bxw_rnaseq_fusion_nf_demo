@@ -4,8 +4,8 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 include { StarFusion } from '../subworkflows/StarFusion'
-18include { FusionCatcher } from '../subworkflows/FusionCatcher'
-19include { ChimPipe } from '../subworkflows/ChimPipe'
+include { FusionCatcher } from '../subworkflows/FusionCatcher'
+include { ChimPipe } from '../subworkflows/ChimPipe'
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_bxw_rnaseq_fusion_nf_demobxw_rnaseq_fusion_nf_demo_pipeline'
 /*
