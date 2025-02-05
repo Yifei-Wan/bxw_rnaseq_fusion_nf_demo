@@ -14,9 +14,6 @@
 */
 
 include { BXW_RNASEQ_FUSION_NF_DEMOBXW_RNASEQ_FUSION_NF_DEMO  } from './workflows/bxw_rnaseq_fusion_nf_demobxw_rnaseq_fusion_nf_demo'
-include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_bxw_rnaseq_fusion_nf_demobxw_rnaseq_fusion_nf_demo_pipeline'
-include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_bxw_rnaseq_fusion_nf_demobxw_rnaseq_fusion_nf_demo_pipeline'
-include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_bxw_rnaseq_fusion_nf_demobxw_rnaseq_fusion_nf_demo_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -27,7 +24,10 @@ include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_bxw_
 // TODO nf-core: Remove this line if you don't need a FASTA file
 //   This is an example of how to use getGenomeAttribute() to fetch parameters
 //   from igenomes.config using `--genome`
-params.fasta = getGenomeAttribute('fasta')
+// Pre-pair input fastq
+input_fastq = Channel
+    .fromFilePairs("${params.input}/*_{1,2}.fastq", flat: true)
+    .set { fastq_pairs }
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -41,7 +41,7 @@ params.fasta = getGenomeAttribute('fasta')
 workflow DFCIBXMD_BXW_RNASEQ_FUSION_NF_DEMOBXW_RNASEQ_FUSION_NF_DEMO {
 
     take:
-    samplesheet // channel: samplesheet read in from --input
+    input_fastq // paired fastq
 
     main:
 
@@ -49,10 +49,8 @@ workflow DFCIBXMD_BXW_RNASEQ_FUSION_NF_DEMOBXW_RNASEQ_FUSION_NF_DEMO {
     // WORKFLOW: Run pipeline
     //
     BXW_RNASEQ_FUSION_NF_DEMOBXW_RNASEQ_FUSION_NF_DEMO (
-        samplesheet
+        input_fastq
     )
-    emit:
-    multiqc_report = BXW_RNASEQ_FUSION_NF_DEMOBXW_RNASEQ_FUSION_NF_DEMO.out.multiqc_report // channel: /path/to/multiqc_report.html
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -79,7 +77,7 @@ workflow {
     // WORKFLOW: Run main workflow
     //
     DFCIBXMD_BXW_RNASEQ_FUSION_NF_DEMOBXW_RNASEQ_FUSION_NF_DEMO (
-        PIPELINE_INITIALISATION.out.samplesheet
+        input_fastq
     )
     //
     // SUBWORKFLOW: Run completion tasks
